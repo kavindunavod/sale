@@ -1,21 +1,22 @@
+object bookCost{
+    def calculateDiscount(coverprice: Double, discount:Double):Double={
+        coverprice*(1-discount);
+    }
 
-object project7 {
+    def calculateShippingCost(numCopies: Int):Double={
+        if (numCopies<=50){
+            3.0
+        }
+        else{
+            0.75* (numCopies-50)
+        }
+    }
 
-  def main(args: Array[String]) : Unit = {
-  calculate();
+    def calculateWholesalePrice(coverprice: Double,numCopies: Int, discount: Double):Double={
+        (calculateDiscount(coverprice,discount) * numCopies) + calculateShippingCost(numCopies)
+    }
 
-  }
-
-  def calculate(): Unit = {
-    val price = 24.95;
-    val discount = 0.4;
-    val book = 60;
-    val shipping_cost = 3 + 0.75 * 10;
-    val quantity = 60;
-    val total = (quantity * price) * discount + shipping_cost;
-    val rounded = (math.round(total * 100.0) / 100.0)
-    println(rounded);
-
-  }
-
+    def main(args:Array[String]):Unit={
+        println(s"Wholesale cost for 60 books: Rs. ${calculateWholesalePrice(24.95,60,0.4)}")
+    }
 }
